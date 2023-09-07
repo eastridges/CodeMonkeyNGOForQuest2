@@ -1,0 +1,5 @@
+C:/stuff/Quest2/CodeMonkeyNGO/.utmp/RelWithDebInfo/2b2p5161/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/stuff/Quest2/CodeMonkeyNGO/.utmp/RelWithDebInfo/2b2p5161/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+C:/stuff/Quest2/CodeMonkeyNGO/.utmp/RelWithDebInfo/2b2p5161/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/stuff/Quest2/CodeMonkeyNGO/.utmp/RelWithDebInfo/2b2p5161/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+C:/stuff/Quest2/CodeMonkeyNGO/.utmp/RelWithDebInfo/2b2p5161/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir
