@@ -38,7 +38,12 @@ public class PlayerNetwork : NetworkBehaviour
             return;
         }
 
-
+        ////this worked for ball in box but not in CodeMonkeyNGO:
+        //float moveSpeed = 3f;
+        //Vector3 moveDir = new Vector3();
+        //float moveHorizontal = Input.GetAxis("Horizontal");
+        //moveDir.x = moveHorizontal;
+        //transform.position += moveDir * moveSpeed * Time.deltaTime;
 
         Vector3 moveDir = new Vector3();
         float moveSpeed = 3f;
@@ -56,15 +61,15 @@ public class PlayerNetwork : NetworkBehaviour
             //just make some motion to show it's alive
             moveSpeed = 1; //slower
             int cycle = DateTime.Now.Second;
-            if(cycle % 4 == 0) //modulus
+            if (cycle % 4 == 0) //modulus
             {
                 moveDir.x = +1f;
             }
-            else if(cycle % 4 == 1)
+            else if (cycle % 4 == 1)
             {
                 moveDir.z = +1f;
-            } 
-            else if( cycle % 4 == 2)
+            }
+            else if (cycle % 4 == 2)
             {
                 moveDir.x = -1f;
             }
