@@ -9,6 +9,9 @@ public class NetworkManagerUI : MonoBehaviour
     [SerializeField] private Button serverBtn; 
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
+    [SerializeField] private Button CenterClientButton;
+    public InputReader Inputs;
+    private bool hasStartedNetworkManager; //false
 
     private void Awake()
     {
@@ -24,6 +27,29 @@ public class NetworkManagerUI : MonoBehaviour
         {
             NetworkManager.Singleton.StartClient();
         });
+        CenterClientButton.onClick.AddListener(() => 
+        { 
+            NetworkManager.Singleton.StartClient(); 
+        });
     }
+
+    /// <summary>
+    /// called every frame
+    /// </summary>
+    private void Update()
+    {
+        if (!hasStartedNetworkManager)
+        { }
+        if (Inputs.ButtonA)
+        {
+            NetworkManager.Singleton.StartHost();
+            hasStartedNetworkManager = true;
+        }
+        else if (Inputs.ButtonB)
+        {
+            NetworkManager.Singleton.StartClient();
+            hasStartedNetworkManager = true;
+        }
+    } //from if hasn't already started network manager host or client
 
 }

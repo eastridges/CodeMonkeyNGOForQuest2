@@ -7,7 +7,7 @@ using System;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-    internal InputReader Inputs;
+    public InputReader Inputs;
     internal bool InputReaderGameObjectExists;  //false
     internal bool InputReaderComponentExists;  // false
 
@@ -25,6 +25,7 @@ public class PlayerNetwork : NetworkBehaviour
                 InputReaderComponentExists = true;
             }
         }
+
         //
         //Inputs = GameObject.FindGameObjectWithTag("InputReaderTag").GetComponent<InputReader>(); 
 
@@ -38,6 +39,7 @@ public class PlayerNetwork : NetworkBehaviour
             return;
         }
 
+
         ////this worked for ball in box but not in CodeMonkeyNGO:
         //float moveSpeed = 3f;
         //Vector3 moveDir = new Vector3();
@@ -45,19 +47,37 @@ public class PlayerNetwork : NetworkBehaviour
         //moveDir.x = moveHorizontal;
         //transform.position += moveDir * moveSpeed * Time.deltaTime;
 
+        //assign Inputs again even though was done in the Start() method
+        GameObject go = GameObject.FindGameObjectWithTag("InputReaderTag");
+        if (go != null)
+        {
+            InputReaderGameObjectExists = true;
+            Inputs = go.GetComponent<InputReader>();
+            if (Inputs != null)
+            {
+                InputReaderComponentExists = true;
+            }
+        }
+
         Vector3 moveDir = new Vector3();
         float moveSpeed = 3f;
         float vertSpeed = 0;
+        //if (InputReaderComponentExists)  //NOTE This returns true and vert speed is up if not commented out... but RightControllerFound returns false
+        //    vertSpeed = 0.5f;
         if (Inputs.RightControllerFound)
         //if(false)
         {
-            if (Inputs.ButtonXDown)
-                moveDir.x = +1f;
-            else if (Inputs.ButtonYDown)
-                moveDir.x = -1f;
+            Vector2 joystick = Inputs.rightJoystick;
+            moveDir = new Vector3(joystick.x, vertSpeed, joystick.y);
+            //if (Inputs.ButtonA)
+            //    moveDir.x = +1f;
+            //else if (Inputs.ButtonB)
+            //    moveDir.x = -1f;
         }
         else
         {
+
+
             //just make some motion to show it's alive
             moveSpeed = 1; //slower
             int cycle = DateTime.Now.Second;
@@ -78,10 +98,47 @@ public class PlayerNetwork : NetworkBehaviour
                 moveDir.z = -1f;
             }
         }
-        //Vector2 joystick = Inputs.rightJoystick;
-        //moveDir = new Vector3(joystick.x, vertSpeed, joystick.y);
+
         moveDir.y = vertSpeed;
         transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+        ////////Vector3 moveDir = new Vector3();
+        ////////float moveSpeed = 3f;
+        ////////float vertSpeed = 0;
+        ////////if (Inputs.RightControllerFound)
+        //////////if(false)
+        ////////{
+        ////////    if (Inputs.ButtonXDown)
+        ////////        moveDir.x = +1f;
+        ////////    else if (Inputs.ButtonYDown)
+        ////////        moveDir.x = -1f;
+        ////////}
+        ////////else
+        ////////{
+        ////////    //just make some motion to show it's alive
+        ////////    moveSpeed = 1; //slower
+        ////////    int cycle = DateTime.Now.Second;
+        ////////    if (cycle % 4 == 0) //modulus
+        ////////    {
+        ////////        moveDir.x = +1f;
+        ////////    }
+        ////////    else if (cycle % 4 == 1)
+        ////////    {
+        ////////        moveDir.z = +1f;
+        ////////    }
+        ////////    else if (cycle % 4 == 2)
+        ////////    {
+        ////////        moveDir.x = -1f;
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        moveDir.z = -1f;
+        ////////    }
+        ////////}
+        //////////Vector2 joystick = Inputs.rightJoystick;
+        //////////moveDir = new Vector3(joystick.x, vertSpeed, joystick.y);
+        ////////moveDir.y = vertSpeed;
+        ////////transform.position += moveDir * moveSpeed * Time.deltaTime;
 
         //from here down works in Windows...
         //Vector3 moveDir = new Vector3(0, 0, 0);

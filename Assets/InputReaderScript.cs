@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using Unity.Netcode;
 using TMPro;
 
 
@@ -9,7 +10,7 @@ using TMPro;
 //there is a corresponding keyboard key for each for debugging purposes
 //Keyboard keys used: A,B,U,H,J,K,arrow keys, comma, period, X, Y, P, Q, O, W
 //Also, M and N are used to tilt up and down in the camera controller
-public class InputReader : MonoBehaviour
+public class InputReader : NetworkBehaviour
 {
     //So you can write the the debugger screen
     //public TextMeshPro debuggerText;
